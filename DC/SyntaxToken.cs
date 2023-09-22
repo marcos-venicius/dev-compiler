@@ -2,18 +2,24 @@ using DC.Enums;
 
 namespace DC;
 
-public sealed class SyntaxToken
+public sealed class SyntaxToken : SyntaxNode
 {
-    public SyntaxKind Kind { get; }
     public int Position { get; }
-    public string Text { get; }
+    public string? Text { get; }
     public object? Value { get; }
 
-    public SyntaxToken(SyntaxKind kind, int position, string text, object? value = null)
+    public override SyntaxKind Kind { get; }
+
+    public SyntaxToken(SyntaxKind kind, int position, string? text, object? value = null)
     {
         Kind = kind;
         Position = position;
         Text = text;
         Value = value;
+    }
+
+    public override IEnumerable<SyntaxNode> GetChildren()
+    {
+        return Enumerable.Empty<SyntaxNode>();
     }
 }

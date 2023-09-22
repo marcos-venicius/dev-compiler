@@ -1,6 +1,4 @@
-﻿using DC.Enums;
-
-namespace DC;
+﻿namespace DC;
 
 public sealed class Program
 {
@@ -9,32 +7,52 @@ public sealed class Program
 
         while (Repl())
             ;
-            
     }
 
-    public static bool Repl()
+    private static bool Repl()
     {
         Console.Write("> ");
 
         var line = Console.ReadLine() ?? "";
 
-        var lexer = new Lexer(line);
+        var parser = new Parser(line);
 
-        while (true)
-        {
-            var token = lexer.NextToken();
+        var expression = parser.Parse();
 
-            if (token.Kind == SyntaxKind.EndOfFileToken)
-                break;
+        Console.ForegroundColor = ConsoleColor.DarkGray;
 
-            Console.Write($"{token.Kind}: '{token.Text}'");
+        PrettyPrint(expression);
 
-            if (token.Value is not null)
-                Console.Write($" {token.Value}");
-
-            Console.WriteLine();
-        }
+        Console.ResetColor();
 
         return true;
+    }
+
+    private static void PrettyPrint(SyntaxNode node, string indent = "", bool isLast = true)
+    {
+        // └── 
+        // ├──
+        // │
+
+        var marker = isLast ? "└── " : "├── ";
+
+        Console.Write(indent);
+        Console.Write(marker);
+        Console.Write(node.Kind);
+
+        if (node is SyntaxToken token && token.Value is not null)
+        {
+            Console.Write(" ");
+            Console.Write(token.Value);
+        }
+
+        Console.WriteLine();
+
+        indent += isLast ? "    " : "│   ";
+
+        var lastChild = node.GetChildren().LastOrDefault();
+
+        foreach (var child in node.GetChildren())
+            PrettyPrint(child, indent, child == lastChild);
     }
 }
