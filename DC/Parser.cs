@@ -75,20 +75,34 @@ public sealed class Parser
 
     public SyntaxTree Parse()
     {
-        var expression = ParseExpression();
+        var expression = ParseTerm();
 
         var endOfFileToken = Match(SyntaxKind.EndOfFileToken);
 
         return new SyntaxTree(_diagnostics, expression, endOfFileToken);
     }
 
-    private ExpressionSyntax ParseExpression()
+    private ExpressionSyntax ParseTerm()
+    {
+        var left = ParseFactor();
+
+        while (Current.Kind == SyntaxKind.PlusToken ||
+                Current.Kind == SyntaxKind.MinusToken)
+        {
+            var operatorToken = NextToken();
+            var right = ParseFactor();
+
+            left = new BinaryExpressionSyntax(left, operatorToken, right);
+        }
+
+        return left;
+    }
+
+    private ExpressionSyntax ParseFactor()
     {
         var left = ParsePrimaryExpression();
 
-        while (Current.Kind == SyntaxKind.PlusToken ||
-                Current.Kind == SyntaxKind.MinusToken ||
-                Current.Kind == SyntaxKind.StarToken ||
+        while (Current.Kind == SyntaxKind.StarToken ||
                 Current.Kind == SyntaxKind.SlashToken)
         {
             var operatorToken = NextToken();
