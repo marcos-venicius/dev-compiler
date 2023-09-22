@@ -38,6 +38,9 @@ public sealed class Evaluator
             return result;
         }
 
+        if (node is ParenthesizedExpressionSyntax p)
+            return EvaluateExpression(p.Expression);
+
         throw new Exception($"Unexpected node {node.Kind}");
     }
 }

@@ -13,5 +13,6 @@ public enum SyntaxKind
     BadToken,
     EndOfFileToken,
     NumberExpression,
-    BinaryExpression
+    BinaryExpression,
+    ParenthesizedExpression
 }
