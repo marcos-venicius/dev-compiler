@@ -1,6 +1,6 @@
 using DC.Enums;
 
-namespace DC;
+namespace DC.CodeAnalysis;
 
 public sealed class SyntaxToken : SyntaxNode
 {

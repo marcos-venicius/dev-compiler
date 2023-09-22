@@ -1,4 +1,6 @@
-﻿namespace DC;
+﻿using DC.CodeAnalysis;
+
+namespace DC;
 
 public sealed class Program
 {

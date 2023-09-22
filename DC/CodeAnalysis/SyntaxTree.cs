@@ -1,4 +1,4 @@
-﻿namespace DC;
+﻿namespace DC.CodeAnalysis;
 
 public sealed class SyntaxTree
 {
