@@ -6,6 +6,9 @@ public sealed class Lexer
 {
     private readonly string _text;
     private int _position;
+    private List<string> _diagnostics = new();
+
+    public IEnumerable<string> Diagnostics => _diagnostics;
 
     public Lexer(string text)
     {
@@ -77,6 +80,8 @@ public sealed class Lexer
             default:
                 break;
         }
+
+        _diagnostics.Add($"ERROR: Bad character input: '{Current}'");
 
         return new SyntaxToken(SyntaxKind.BadToken, _position++, _text.Substring(_position - 1, 1));
     }
