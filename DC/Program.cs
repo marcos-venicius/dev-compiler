@@ -34,6 +34,14 @@ public sealed class Program
 
             Console.ResetColor();
         }
+        else
+        {
+            var evaluator = new Evaluator(syntaxTree.Root);
+
+            var result = evaluator.Evaluate();
+
+            Console.WriteLine(result);
+        } 
 
         return true;
     }
