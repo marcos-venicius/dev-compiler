@@ -2,6 +2,8 @@
 
 public sealed class Program
 {
+    private static bool _showTree = false;
+
     public static void Main()
     {
 
@@ -15,21 +17,40 @@ public sealed class Program
 
         var line = Console.ReadLine() ?? "";
 
-        var parser = new Parser(line);
+        if (string.IsNullOrWhiteSpace(line))
+            return true;
 
-        var syntaxTree = parser.Parse();
+        if (line == "#showTree")
+        {
+            _showTree = !_showTree;
 
-        Console.ForegroundColor = ConsoleColor.DarkGray;
+            Console.WriteLine(_showTree ? "Showing parse trees." : "Not showing parse trees.");
 
-        PrettyPrint(syntaxTree.Root);
+            return true;
+        } else if (line == "#clear")
+        {
+            Console.Clear();
 
-        Console.ResetColor();
+            return true;
+        } else if (line == "#exit")
+        {
+            return false;
+        }
+
+        var syntaxTree = SyntaxTree.Parse(line);
+
+        if (_showTree)
+        {
+            Console.ForegroundColor = ConsoleColor.DarkGray;
+            PrettyPrint(syntaxTree.Root);
+            Console.ResetColor();
+        }
 
         if (syntaxTree.Diagnostics.Any())
         {
             Console.ForegroundColor = ConsoleColor.DarkRed;
 
-            foreach (var diagnostic in parser.Diagnostics)
+            foreach (var diagnostic in syntaxTree.Diagnostics)
                 Console.WriteLine(diagnostic);
 
             Console.ResetColor();
