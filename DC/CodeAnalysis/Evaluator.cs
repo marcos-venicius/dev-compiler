@@ -21,6 +21,18 @@ public sealed class Evaluator
         if (node is LiteralExpressionSyntax number)
             return (int)number.LiteralToken.Value!;
 
+        if (node is UnaryExpressionSyntax u)
+        {
+            var operand = EvaluateExpression(u.Operand);
+
+            if (u.OperatorToken.Kind == SyntaxKind.PlusToken)
+                return operand;
+            else if (u.OperatorToken.Kind == SyntaxKind.MinusToken)
+                return -operand;
+
+            throw new Exception($"Unexpected unary operator {u.OperatorToken.Kind}");
+        }
+
         if (node is BinaryExpressionSyntax binary)
         {
             var left = EvaluateExpression(binary.Left);

@@ -91,9 +91,23 @@ internal sealed class Parser
         return new SyntaxTree(_diagnostics, expression, endOfFileToken);
     }
 
-    private ExpressionSyntax ParseExpression(int parentPrecedence = 0) {
-        var left = ParsePrimaryExpression();
-        
+    private ExpressionSyntax ParseExpression(int parentPrecedence = 0)
+    {
+        ExpressionSyntax left;
+        var unaryOperatorPrecedence = Current.Kind.GetUnaryOperatorPrecedence();
+
+        if (unaryOperatorPrecedence != 0 && unaryOperatorPrecedence >= parentPrecedence)
+        {
+            var operatorToken = NextToken();
+            var operand = ParseExpression(unaryOperatorPrecedence);
+             
+             left = new UnaryExpressionSyntax(operatorToken, operand);
+        }
+        else
+        {
+            left = ParsePrimaryExpression();
+        }
+
         while (true)
         {
             var precedence = Current.Kind.GetBinaryOperatorPrecedence();
