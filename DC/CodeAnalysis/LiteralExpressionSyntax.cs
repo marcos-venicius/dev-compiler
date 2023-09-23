@@ -4,7 +4,7 @@ namespace DC.CodeAnalysis;
 
 public sealed class LiteralExpressionSyntax : ExpressionSyntax
 {
-    public override SyntaxKind Kind => SyntaxKind.NumberExpression;
+    public override SyntaxKind Kind => SyntaxKind.LiteralExpression;
 
     public SyntaxToken LiteralToken { get; }
 
