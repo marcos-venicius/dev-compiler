@@ -1,4 +1,4 @@
-﻿using DC.Enums;
+﻿using DC.CodeAnalysis.Enums;
 
 namespace DC.CodeAnalysis;
 

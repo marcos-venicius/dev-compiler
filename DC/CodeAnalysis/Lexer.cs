@@ -1,8 +1,8 @@
-using DC.Enums;
+using DC.CodeAnalysis.Enums;
 
 namespace DC.CodeAnalysis;
 
-public sealed class Lexer
+internal sealed class Lexer
 {
     private readonly string _text;
     private int _position;

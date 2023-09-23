@@ -1,8 +1,8 @@
-﻿using DC.Enums;
+﻿using DC.CodeAnalysis.Enums;
 
 namespace DC.CodeAnalysis;
 
-public sealed class Parser
+internal sealed class Parser
 {
     private readonly SyntaxToken[] _tokens;
     private int _position;
@@ -56,7 +56,7 @@ public sealed class Parser
         return current;
     }
 
-    private SyntaxToken Match(SyntaxKind kind)
+    private SyntaxToken MatchToken(SyntaxKind kind)
     {
         if (Current.Kind == kind)
             return NextToken();
@@ -77,21 +77,21 @@ public sealed class Parser
         {
             var left = NextToken();
             var expression = ParseExpression();
-            var right = Match(SyntaxKind.CloseParenthesisToken);
+            var right = MatchToken(SyntaxKind.CloseParenthesisToken);
 
             return new ParenthesizedExpressionSyntax(left, expression, right);
         }
 
-        var numberToken = Match(SyntaxKind.NumberToken);
+        var numberToken = MatchToken(SyntaxKind.NumberToken);
 
         return new NumberExpressionSyntax(numberToken);
     }
 
     public SyntaxTree Parse()
     {
-        var expression = ParseTerm();
+        var expression = ParseExpression();
 
-        var endOfFileToken = Match(SyntaxKind.EndOfFileToken);
+        var endOfFileToken = MatchToken(SyntaxKind.EndOfFileToken);
 
         return new SyntaxTree(_diagnostics, expression, endOfFileToken);
     }

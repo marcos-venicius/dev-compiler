@@ -1,8 +1,8 @@
-﻿using DC.Enums;
+﻿using DC.CodeAnalysis.Enums;
 
 namespace DC.CodeAnalysis;
 
-public class NumberExpressionSyntax : ExpressionSyntax
+public sealed class NumberExpressionSyntax : ExpressionSyntax
 {
     public override SyntaxKind Kind => SyntaxKind.NumberExpression;
 

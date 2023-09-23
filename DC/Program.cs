@@ -2,18 +2,19 @@
 
 namespace DC;
 
-public sealed class Program
+internal static class Program
 {
     private static bool _showTree = false;
 
     public static void Main()
     {
+        var treePrinter = new TreePrinter();
 
-        while (Repl())
+        while (Repl(treePrinter))
             ;
     }
 
-    private static bool Repl()
+    private static bool Repl(TreePrinter treePrinter)
     {
         Console.Write("> ");
 
@@ -29,12 +30,14 @@ public sealed class Program
             Console.WriteLine(_showTree ? "Showing parse trees." : "Not showing parse trees.");
 
             return true;
-        } else if (line == "#clear")
+        }
+        else if (line == "#clear")
         {
             Console.Clear();
 
             return true;
-        } else if (line == "#exit")
+        }
+        else if (line == "#exit")
         {
             return false;
         }
@@ -44,7 +47,7 @@ public sealed class Program
         if (_showTree)
         {
             Console.ForegroundColor = ConsoleColor.DarkGray;
-            PrettyPrint(syntaxTree.Root);
+            treePrinter.Print(syntaxTree.Root);
             Console.ResetColor();
         }
 
@@ -64,36 +67,8 @@ public sealed class Program
             var result = evaluator.Evaluate();
 
             Console.WriteLine(result);
-        } 
-
-        return true;
-    }
-
-    private static void PrettyPrint(SyntaxNode node, string indent = "", bool isLast = true)
-    {
-        // └── 
-        // ├──
-        // │
-
-        var marker = isLast ? "└── " : "├── ";
-
-        Console.Write(indent);
-        Console.Write(marker);
-        Console.Write(node.Kind);
-
-        if (node is SyntaxToken token && token.Value is not null)
-        {
-            Console.Write(" ");
-            Console.Write(token.Value);
         }
 
-        Console.WriteLine();
-
-        indent += isLast ? "    " : "│   ";
-
-        var lastChild = node.GetChildren().LastOrDefault();
-
-        foreach (var child in node.GetChildren())
-            PrettyPrint(child, indent, child == lastChild);
+        return true;
     }
 }

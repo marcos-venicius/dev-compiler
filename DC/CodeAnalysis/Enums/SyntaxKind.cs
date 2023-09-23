@@ -1,4 +1,4 @@
-namespace DC.Enums;
+namespace DC.CodeAnalysis.Enums;
 
 public enum SyntaxKind
 {
