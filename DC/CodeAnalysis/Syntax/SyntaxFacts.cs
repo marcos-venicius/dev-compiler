@@ -1,6 +1,6 @@
 using DC.CodeAnalysis.Enums;
 
-namespace DC.CodeAnalysis;
+namespace DC.CodeAnalysis.Syntax;
 
 internal static class SyntaxFacts
 {

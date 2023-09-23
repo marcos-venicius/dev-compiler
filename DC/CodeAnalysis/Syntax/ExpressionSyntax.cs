@@ -1,4 +1,4 @@
-﻿namespace DC.CodeAnalysis;
+﻿namespace DC.CodeAnalysis.Syntax;
 
 public abstract class ExpressionSyntax : SyntaxNode
 {

@@ -1,4 +1,4 @@
-﻿using DC.CodeAnalysis;
+﻿using DC.CodeAnalysis.Syntax;
 
 namespace DC;
 
