@@ -96,7 +96,7 @@ internal sealed class Parser
         
         while (true)
         {
-            var precedence = GetBinaryOperatorPrecedence(Current.Kind);
+            var precedence = Current.Kind.GetBinaryOperatorPrecedence();
 
             if (precedence == 0 || precedence <= parentPrecedence)
                 break;
@@ -110,13 +110,4 @@ internal sealed class Parser
         return left;
     }
 
-    private static int GetBinaryOperatorPrecedence(SyntaxKind kind)
-    {
-        return kind switch
-        {
-            SyntaxKind.SlashToken or SyntaxKind.StarToken => 2,
-            SyntaxKind.PlusToken or SyntaxKind.MinusToken => 1,
-            _ => 0,
-        };
-    }
 }
