@@ -18,8 +18,8 @@ public sealed class Evaluator
 
     private int EvaluateExpression(ExpressionSyntax node)
     {
-        if (node is NumberExpressionSyntax number)
-            return (int)number.NumberToken.Value!;
+        if (node is LiteralExpressionSyntax number)
+            return (int)number.LiteralToken.Value!;
 
         if (node is BinaryExpressionSyntax binary)
         {

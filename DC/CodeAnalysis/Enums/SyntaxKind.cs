@@ -2,6 +2,7 @@ namespace DC.CodeAnalysis.Enums;
 
 public enum SyntaxKind
 {
+    // Tokens
     NumberToken,
     MinusToken,
     PlusToken,
@@ -12,6 +13,8 @@ public enum SyntaxKind
     WhitespaceToken,
     BadToken,
     EndOfFileToken,
+
+    // Expressions
     NumberExpression,
     BinaryExpression,
     ParenthesizedExpression
