@@ -66,11 +66,6 @@ internal sealed class Parser
         return new SyntaxToken(kind, Current.Position, null, null);
     }
 
-    private ExpressionSyntax ParseExpression()
-    {
-        return ParseTerm();
-    }
-
     private ExpressionSyntax ParsePrimaryExpression()
     {
         if (Current.Kind == SyntaxKind.OpenParenthesisToken)
@@ -96,35 +91,32 @@ internal sealed class Parser
         return new SyntaxTree(_diagnostics, expression, endOfFileToken);
     }
 
-    private ExpressionSyntax ParseTerm()
-    {
-        var left = ParseFactor();
-
-        while (Current.Kind == SyntaxKind.PlusToken ||
-                Current.Kind == SyntaxKind.MinusToken)
+    private ExpressionSyntax ParseExpression(int parentPrecedence = 0) {
+        var left = ParsePrimaryExpression();
+        
+        while (true)
         {
-            var operatorToken = NextToken();
-            var right = ParseFactor();
+            var precedence = GetBinaryOperatorPrecedence(Current.Kind);
 
+            if (precedence == 0 || precedence <= parentPrecedence)
+                break;
+
+            var operatorToken = NextToken();
+
+            var right = ParseExpression(precedence);
             left = new BinaryExpressionSyntax(left, operatorToken, right);
         }
 
         return left;
     }
 
-    private ExpressionSyntax ParseFactor()
+    private static int GetBinaryOperatorPrecedence(SyntaxKind kind)
     {
-        var left = ParsePrimaryExpression();
-
-        while (Current.Kind == SyntaxKind.StarToken ||
-                Current.Kind == SyntaxKind.SlashToken)
+        return kind switch
         {
-            var operatorToken = NextToken();
-            var right = ParsePrimaryExpression();
-
-            left = new BinaryExpressionSyntax(left, operatorToken, right);
-        }
-
-        return left;
+            SyntaxKind.SlashToken or SyntaxKind.StarToken => 2,
+            SyntaxKind.PlusToken or SyntaxKind.MinusToken => 1,
+            _ => 0,
+        };
     }
 }
