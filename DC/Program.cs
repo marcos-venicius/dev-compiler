@@ -1,5 +1,6 @@
 ﻿using DC.CodeAnalysis;
 using DC.CodeAnalysis.Syntax;
+using Binder = DC.CodeAnalysis.Binding.Binder;
 
 namespace DC;
 
@@ -45,6 +46,12 @@ internal static class Program
 
         var syntaxTree = SyntaxTree.Parse(line);
 
+        var binder = new Binder();
+
+        var boundExpression = binder.BindExpression(syntaxTree.Root);
+
+        var diagnostics = syntaxTree.Diagnostics.Concat(binder.Diagnostics).ToArray();
+
         if (_showTree)
         {
             Console.ForegroundColor = ConsoleColor.DarkGray;
@@ -52,18 +59,18 @@ internal static class Program
             Console.ResetColor();
         }
 
-        if (syntaxTree.Diagnostics.Any())
+        if (diagnostics.Any())
         {
             Console.ForegroundColor = ConsoleColor.DarkRed;
 
-            foreach (var diagnostic in syntaxTree.Diagnostics)
+            foreach (var diagnostic in diagnostics)
                 Console.WriteLine(diagnostic);
 
             Console.ResetColor();
         }
         else
         {
-            var evaluator = new Evaluator(syntaxTree.Root);
+            var evaluator = new Evaluator(boundExpression);
 
             var result = evaluator.Evaluate();
 
