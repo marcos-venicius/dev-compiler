@@ -8,8 +8,10 @@ internal static class SyntaxFacts
     {
         return kind switch
         {
-            SyntaxKind.SlashToken or SyntaxKind.StarToken => 2,
-            SyntaxKind.PlusToken or SyntaxKind.MinusToken => 1,
+            SyntaxKind.SlashToken or SyntaxKind.StarToken => 4,
+            SyntaxKind.PlusToken or SyntaxKind.MinusToken => 3,
+            SyntaxKind.AmpersandAmpersandToken => 2,
+            SyntaxKind.PipePipeToken => 1,
             _ => 0,
         };
     }
@@ -18,7 +20,7 @@ internal static class SyntaxFacts
     {
         return kind switch
         {
-            SyntaxKind.PlusToken or SyntaxKind.MinusToken => 1,
+            SyntaxKind.PlusToken or SyntaxKind.MinusToken or SyntaxKind.BangToken => 5,
             _ => 0,
         };
     }

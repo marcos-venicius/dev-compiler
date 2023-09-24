@@ -6,7 +6,7 @@ internal sealed class Parser
 {
     private readonly SyntaxToken[] _tokens;
     private int _position;
-    private List<string> _diagnostics = new();
+    private readonly List<string> _diagnostics = new();
 
     public IEnumerable<string> Diagnostics => _diagnostics;
 
@@ -82,7 +82,7 @@ internal sealed class Parser
             case SyntaxKind.TrueKeyword:
             {
                 var keywordToken = NextToken();
-                var value = Current.Kind == SyntaxKind.TrueKeyword;
+                var value = keywordToken.Kind == SyntaxKind.TrueKeyword;
 
                 return new LiteralExpressionSyntax(keywordToken, value);
             }

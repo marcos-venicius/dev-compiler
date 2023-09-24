@@ -14,6 +14,9 @@ public enum SyntaxKind
     BadToken,
     EndOfFileToken,
     IdentifierToken,
+    BangToken,
+    AmpersandAmpersandToken,
+    PipePipeToken,
 
     // Expressions
     LiteralExpression,

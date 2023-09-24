@@ -23,27 +23,30 @@ internal sealed class Evaluator
 
         if (node is BoundUnaryExpression u)
         {
-            var operand = (int)EvaluateExpression(u.Operand);
+            var operand = EvaluateExpression(u.Operand);
 
             return u.OpeartorKind switch
             {
-                BoundUnaryOperandKind.Identity => operand,
-                BoundUnaryOperandKind.Negation => -operand,
+                BoundUnaryOperandKind.Identity => (int)operand,
+                BoundUnaryOperandKind.Negation => -(int)operand,
+                BoundUnaryOperandKind.LogicalNegation => !(bool)operand,
                 _ => throw new Exception($"Unexpected unary operator {u.OpeartorKind}"),
             };
         }
 
         if (node is BoundBinaryExpression binary)
         {
-            var left = (int)EvaluateExpression(binary.Left);
-            var right = (int)EvaluateExpression(binary.Right);
+            var left = EvaluateExpression(binary.Left);
+            var right = EvaluateExpression(binary.Right);
 
             return binary.OperatorKind switch
             {
-                BoundBinaryOperatorKind.Addition => left + right,
-                BoundBinaryOperatorKind.Subtraction => left - right,
-                BoundBinaryOperatorKind.Multiplication => left * right,
-                BoundBinaryOperatorKind.Division => left / right,
+                BoundBinaryOperatorKind.Addition => (int)left + (int)right,
+                BoundBinaryOperatorKind.Subtraction => (int)left - (int)right,
+                BoundBinaryOperatorKind.Multiplication => (int)left * (int)right,
+                BoundBinaryOperatorKind.Division => (int)left / (int)right,
+                BoundBinaryOperatorKind.LogicalAnd => (bool)left && (bool)right,
+                BoundBinaryOperatorKind.LogicalOr => (bool)left || (bool)right,
                 _ => throw new Exception($"Unexpected binary operator {binary.OperatorKind}")
             };
         }
