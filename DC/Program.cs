@@ -8,8 +8,21 @@ internal static class Program
 {
     private static bool _showTree = false;
 
+    private readonly static string _banner = """
+ _____     ______     __   __      ______     ______     __    __     ______   __     __         ______     ______    
+/\  __-.  /\  ___\   /\ \ / /     /\  ___\   /\  __ \   /\ "-./  \   /\  == \ /\ \   /\ \       /\  ___\   /\  == \   
+\ \ \/\ \ \ \  __\   \ \ \'/      \ \ \____  \ \ \/\ \  \ \ \-./\ \  \ \  _-/ \ \ \  \ \ \____  \ \  __\   \ \  __<   
+ \ \____-  \ \_____\  \ \__|       \ \_____\  \ \_____\  \ \_\ \ \_\  \ \_\    \ \_\  \ \_____\  \ \_____\  \ \_\ \_\ 
+  \/____/   \/_____/   \/_/         \/_____/   \/_____/   \/_/  \/_/   \/_/     \/_/   \/_____/   \/_____/   \/_/ /_/
+""";
+
     public static void Main()
     {
+        Console.ForegroundColor = ConsoleColor.Green;
+        Console.WriteLine(_banner);
+        Console.WriteLine();
+        Console.ResetColor();
+
         var treePrinter = new TreePrinter();
 
         while (Repl(treePrinter))
