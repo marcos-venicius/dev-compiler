@@ -25,12 +25,12 @@ internal sealed class Evaluator
         {
             var operand = EvaluateExpression(u.Operand);
 
-            return u.OpeartorKind switch
+            return u.Op.Kind switch
             {
-                BoundUnaryOperandKind.Identity => (int)operand,
-                BoundUnaryOperandKind.Negation => -(int)operand,
-                BoundUnaryOperandKind.LogicalNegation => !(bool)operand,
-                _ => throw new Exception($"Unexpected unary operator {u.OpeartorKind}"),
+                BoundUnaryOperatorKind.Identity => (int)operand,
+                BoundUnaryOperatorKind.Negation => -(int)operand,
+                BoundUnaryOperatorKind.LogicalNegation => !(bool)operand,
+                _ => throw new Exception($"Unexpected unary operator {u.Op}"),
             };
         }
 
@@ -39,7 +39,7 @@ internal sealed class Evaluator
             var left = EvaluateExpression(binary.Left);
             var right = EvaluateExpression(binary.Right);
 
-            return binary.OperatorKind switch
+            return binary.Op.Kind switch
             {
                 BoundBinaryOperatorKind.Addition => (int)left + (int)right,
                 BoundBinaryOperatorKind.Subtraction => (int)left - (int)right,
@@ -47,7 +47,7 @@ internal sealed class Evaluator
                 BoundBinaryOperatorKind.Division => (int)left / (int)right,
                 BoundBinaryOperatorKind.LogicalAnd => (bool)left && (bool)right,
                 BoundBinaryOperatorKind.LogicalOr => (bool)left || (bool)right,
-                _ => throw new Exception($"Unexpected binary operator {binary.OperatorKind}")
+                _ => throw new Exception($"Unexpected binary operator {binary.Op}")
             };
         }
 
