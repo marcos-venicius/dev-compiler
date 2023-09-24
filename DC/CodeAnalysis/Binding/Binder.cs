@@ -22,7 +22,7 @@ internal sealed class Binder
 
     private static BoundExpression BindLiteralExpression(LiteralExpressionSyntax syntax)
     {
-        var value = syntax.LiteralToken.Value as int? ?? 0;
+        var value = syntax.Value ?? 0;
 
         return new BoundLiteralExpression(value);
     }
@@ -52,7 +52,7 @@ internal sealed class Binder
         {
             _diagnostics.Add($"Binary operator '{syntax.OperatorToken.Text}' is not defined for types {boundLeft.Type} and {boundRight.Type}");
 
-            return  boundLeft;
+            return boundLeft;
         }
 
         return new BoundBinaryExpression(boundLeft, boundOperatorKind.Value, boundRight);

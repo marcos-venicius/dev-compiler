@@ -11,19 +11,19 @@ internal sealed class Evaluator
         _root = root;
     }
 
-    public int Evaluate()
+    public object Evaluate()
     {
         return EvaluateExpression(_root);
     }
 
-    private int EvaluateExpression(BoundExpression node)
+    private object EvaluateExpression(BoundExpression node)
     {
         if (node is BoundLiteralExpression number)
-            return (int)number.Value;
+            return number.Value;
 
         if (node is BoundUnaryExpression u)
         {
-            var operand = EvaluateExpression(u.Operand);
+            var operand = (int)EvaluateExpression(u.Operand);
 
             return u.OpeartorKind switch
             {
@@ -35,8 +35,8 @@ internal sealed class Evaluator
 
         if (node is BoundBinaryExpression binary)
         {
-            var left = EvaluateExpression(binary.Left);
-            var right = EvaluateExpression(binary.Right);
+            var left = (int)EvaluateExpression(binary.Left);
+            var right = (int)EvaluateExpression(binary.Right);
 
             return binary.OperatorKind switch
             {

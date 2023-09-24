@@ -13,10 +13,15 @@ public enum SyntaxKind
     WhitespaceToken,
     BadToken,
     EndOfFileToken,
+    IdentifierToken,
 
     // Expressions
     LiteralExpression,
     UnaryExpression,
     BinaryExpression,
     ParenthesizedExpression,
+
+    // Keywords
+    TrueKeyword,
+    FalseKeyword,
 }
