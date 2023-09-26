@@ -3,7 +3,7 @@ using Comma.CodeAnalysis.Syntax;
 
 namespace Comma.CodeAnalysis.Binding;
 
-public sealed class Binder
+internal sealed class Binder
 {
     private readonly List<string> _diagnostics = new();
 

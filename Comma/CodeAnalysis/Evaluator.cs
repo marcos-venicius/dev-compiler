@@ -2,7 +2,7 @@
 
 namespace Comma.CodeAnalysis;
 
-public sealed class Evaluator
+internal sealed class Evaluator
 {
     private readonly BoundExpression _root;
 

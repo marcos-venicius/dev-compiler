@@ -1,6 +1,5 @@
 ﻿using Comma.CodeAnalysis;
 using Comma.CodeAnalysis.Syntax;
-using Binder = Comma.CodeAnalysis.Binding.Binder;
 
 namespace CMM;
 
@@ -59,11 +58,9 @@ internal static class Program
 
         var syntaxTree = SyntaxTree.Parse(line);
 
-        var binder = new Binder();
+        var binder = new Compilation(syntaxTree);
 
-        var boundExpression = binder.BindExpression(syntaxTree.Root);
-
-        var diagnostics = syntaxTree.Diagnostics.Concat(binder.Diagnostics).ToArray();
+        var evaluationResult = binder.Evaluate();
 
         if (_showTree)
         {
@@ -72,23 +69,17 @@ internal static class Program
             Console.ResetColor();
         }
 
-        if (diagnostics.Any())
+        if (evaluationResult.Diagnostics.Any())
         {
             Console.ForegroundColor = ConsoleColor.DarkRed;
 
-            foreach (var diagnostic in diagnostics)
+            foreach (var diagnostic in evaluationResult.Diagnostics)
                 Console.WriteLine(diagnostic);
 
             Console.ResetColor();
         }
         else
-        {
-            var evaluator = new Evaluator(boundExpression);
-
-            var result = evaluator.Evaluate();
-
-            Console.WriteLine(result);
-        }
+            Console.WriteLine(evaluationResult.Value);
 
         return true;
     }
