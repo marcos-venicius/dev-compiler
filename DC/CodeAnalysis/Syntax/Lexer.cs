@@ -96,8 +96,6 @@ internal sealed class Lexer
                 return new SyntaxToken(SyntaxKind.OpenParenthesisToken, _position++, "(");
             case ')':
                 return new SyntaxToken(SyntaxKind.CloseParenthesisToken, _position++, ")");
-            case '!':
-                return new SyntaxToken(SyntaxKind.BangToken, _position++, "!");
             case '&':
                 {
                     if (Lookahead == '&')
@@ -109,6 +107,19 @@ internal sealed class Lexer
                     if (Lookahead == '|')
                         return new SyntaxToken(SyntaxKind.PipePipeToken, _position += 2, "||");
                     break;
+                }
+            case '=':
+                {
+                    if (Lookahead == '=')
+                        return new SyntaxToken(SyntaxKind.EqualsEqualsToken, _position += 2, "==");
+                    break;
+                }
+            case '!':
+                {
+                    if (Lookahead == '=')
+                        return new SyntaxToken(SyntaxKind.BangEqualsToken, _position += 2, "!=");
+
+                    return new SyntaxToken(SyntaxKind.BangToken, _position++, "!");
                 }
             default:
                 break;
