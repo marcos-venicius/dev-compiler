@@ -72,3 +72,7 @@ ok, just exit
 ### Small support for diagnostics
 ![image](https://github.com/marcos-venicius/dev-compiler/assets/94018427/1ad59fc8-b0ef-422f-b3b3-a70516c1ca42)
 
+
+# Todo
+
+- [ ] create an api for the `Comman` project, to expose only the needed resources
