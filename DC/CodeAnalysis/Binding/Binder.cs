@@ -16,6 +16,7 @@ internal sealed class Binder
             SyntaxKind.LiteralExpression => BindLiteralExpression((LiteralExpressionSyntax)syntax),
             SyntaxKind.BinaryExpression => BindBinaryExpression((BinaryExpressionSyntax)syntax),
             SyntaxKind.UnaryExpression => BindUnaryExpression((UnaryExpressionSyntax)syntax),
+            SyntaxKind.ParenthesizedExpression => BindExpression(((ParenthesizedExpressionSyntax)syntax).Expression),
             _ => throw new Exception($"Unexpected syntax {syntax.Kind}"),
         };
     }

@@ -27,7 +27,7 @@ internal sealed class TreePrinter
 
         Console.WriteLine();
 
-        indent += isLast ? _tab : "│   ";
+        indent += isLast ? _tab : "│  ";
 
         var lastChild = node.GetChildren().LastOrDefault();
 
