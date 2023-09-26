@@ -1,9 +1,9 @@
-using CMM.CodeAnalysis.Enums;
-using CMM.CodeAnalysis.Syntax;
+using Comma.CodeAnalysis.Enums;
+using Comma.CodeAnalysis.Syntax;
 
-namespace CMM.CodeAnalysis.Binding;
+namespace Comma.CodeAnalysis.Binding;
 
-internal sealed class Binder
+public sealed class Binder
 {
     private readonly List<string> _diagnostics = new();
 

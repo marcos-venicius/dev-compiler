@@ -1,4 +1,4 @@
-﻿using CMM.CodeAnalysis.Syntax;
+﻿using Comma.CodeAnalysis.Syntax;
 
 namespace CMM;
 

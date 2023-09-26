@@ -1,4 +1,4 @@
-namespace CMM.CodeAnalysis.Enums;
+namespace Comma.CodeAnalysis.Enums;
 
 public enum SyntaxKind
 {

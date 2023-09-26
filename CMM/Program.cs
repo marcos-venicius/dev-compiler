@@ -1,6 +1,6 @@
-﻿using CMM.CodeAnalysis;
-using CMM.CodeAnalysis.Syntax;
-using Binder = CMM.CodeAnalysis.Binding.Binder;
+﻿using Comma.CodeAnalysis;
+using Comma.CodeAnalysis.Syntax;
+using Binder = Comma.CodeAnalysis.Binding.Binder;
 
 namespace CMM;
 

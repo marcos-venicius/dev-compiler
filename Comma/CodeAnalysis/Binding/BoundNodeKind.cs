@@ -1,6 +1,6 @@
-namespace CMM.CodeAnalysis.Binding;
+namespace Comma.CodeAnalysis.Binding;
 
-internal enum BoundNodeKind
+public enum BoundNodeKind
 {
     LiteralExpression,
     UnaryExpression,

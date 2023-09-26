@@ -1,6 +1,6 @@
-using CMM.CodeAnalysis.Enums;
+using Comma.CodeAnalysis.Enums;
 
-namespace CMM.CodeAnalysis.Binding;
+namespace Comma.CodeAnalysis.Binding;
 
 internal sealed class BoundBinaryOperator
 {

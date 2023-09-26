@@ -1,4 +1,4 @@
-namespace CMM.CodeAnalysis.Binding;
+namespace Comma.CodeAnalysis.Binding;
 
 internal enum BoundUnaryOperatorKind
 {

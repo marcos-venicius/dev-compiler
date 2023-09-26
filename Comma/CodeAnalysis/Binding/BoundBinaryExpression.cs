@@ -1,4 +1,4 @@
-namespace CMM.CodeAnalysis.Binding;
+namespace Comma.CodeAnalysis.Binding;
 
 internal sealed class BoundBinaryExpression : BoundExpression
 {

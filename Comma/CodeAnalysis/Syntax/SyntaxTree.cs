@@ -1,4 +1,4 @@
-﻿namespace CMM.CodeAnalysis.Syntax;
+﻿namespace Comma.CodeAnalysis.Syntax;
 
 public sealed class SyntaxTree
 {

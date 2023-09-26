@@ -1,6 +1,6 @@
-﻿using CMM.CodeAnalysis.Enums;
+﻿using Comma.CodeAnalysis.Enums;
 
-namespace CMM.CodeAnalysis.Syntax;
+namespace Comma.CodeAnalysis.Syntax;
 
 public sealed class BinaryExpressionSyntax : ExpressionSyntax
 {

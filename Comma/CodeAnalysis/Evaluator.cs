@@ -1,8 +1,8 @@
-﻿using CMM.CodeAnalysis.Binding;
+﻿using Comma.CodeAnalysis.Binding;
 
-namespace CMM.CodeAnalysis;
+namespace Comma.CodeAnalysis;
 
-internal sealed class Evaluator
+public sealed class Evaluator
 {
     private readonly BoundExpression _root;
 
