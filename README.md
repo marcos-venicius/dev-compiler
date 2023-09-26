@@ -43,6 +43,15 @@ We have the correct precedences
 ```
 ![image](https://github.com/marcos-venicius/dev-compiler/assets/94018427/2b535e89-f5d8-4796-a883-a83eb130b595)
 
+### Equality operators
+
+```
+==
+!=
+```
+![image](https://github.com/marcos-venicius/dev-compiler/assets/94018427/5d2a5afc-d3f5-445f-bc58-dec3a1fbe4d2)
+
+
 
 ### Special keywords
 
